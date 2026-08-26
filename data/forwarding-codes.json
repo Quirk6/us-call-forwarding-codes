@@ -1,0 +1,134 @@
+{
+  "description": "US carrier call-forwarding codes: activate/deactivate codes for no-answer, busy, and forward-all call forwarding, plus portal paths for carriers without self-serve dial codes.",
+  "placeholders": {
+    "NUMBER10": "10-digit destination number, digits only",
+    "NUMBER11": "11-digit destination number starting with 1, digits only"
+  },
+  "verified_note": "Each entry is checked against the carrier's own published support documentation. Last full review: 2026-08-25.",
+  "carriers": [
+    {
+      "id": "verizon-wireless",
+      "name": "Verizon (wireless)",
+      "category": "mobile",
+      "no_answer_activate": "*71NUMBER10",
+      "forward_all_activate": "*72NUMBER10",
+      "deactivate_all": "*73",
+      "notes": "Forwarding can only be managed from the phone itself, not the Verizon app or website."
+    },
+    {
+      "id": "att-wireless",
+      "name": "AT&T (wireless)",
+      "category": "mobile",
+      "no_answer_activate": "*61*1NUMBER10#",
+      "forward_all_activate": "*21*1NUMBER10#",
+      "no_answer_deactivate": "#61#",
+      "forward_all_deactivate": "#21#",
+      "notes": "Dial the code like a phone number and press call. Standard GSM network codes; if the handset rejects them, use the phone's call-forwarding settings menu (Android: Phone app > Settings > Calling accounts > SIM > Call forwarding) or call 611."
+    },
+    {
+      "id": "tmobile",
+      "name": "T-Mobile",
+      "category": "mobile",
+      "no_answer_activate": "**61*1NUMBER10#",
+      "no_answer_activate_with_ring_time": "**61*1NUMBER10**20# (ring seconds 5-30 in place of 20)",
+      "busy_activate": "**67*1NUMBER10#",
+      "no_answer_deactivate": "##61#",
+      "busy_deactivate": "##67#",
+      "reset_all_forwarding": "##004#",
+      "notes": "##004# resets all forwarding rules to carrier default."
+    },
+    {
+      "id": "verizon-landline",
+      "name": "Verizon landline (copper POTS)",
+      "category": "landline",
+      "no_answer_activate": "*92",
+      "busy_activate": "*90",
+      "no_answer_deactivate": "*93",
+      "busy_deactivate": "*91",
+      "notes": "On most Verizon landlines the forward-to number is provisioned by the Verizon business office; if the code does not take, the carrier sets the destination number."
+    },
+    {
+      "id": "verizon-fios",
+      "name": "Verizon Fios Digital Voice",
+      "category": "landline",
+      "portal_path": "My Verizon > Account Manager > Calling Features",
+      "notes": "Managed online, not via dial codes. Features: Call Forwarding (all calls), Simultaneous Ring (rings a second number alongside), Locate Me (rings phones in order)."
+    },
+    {
+      "id": "att-uverse",
+      "name": "AT&T digital phone (U-verse)",
+      "category": "landline",
+      "no_answer_activate": "*92NUMBER10#",
+      "busy_activate": "*90NUMBER10#",
+      "forward_all_activate": "*72NUMBER10#",
+      "no_answer_deactivate": "*93#",
+      "busy_deactivate": "*91#",
+      "forward_all_deactivate": "*73#"
+    },
+    {
+      "id": "att-landline",
+      "name": "AT&T landline (traditional)",
+      "category": "landline",
+      "forward_all_activate": "*72 then enter the 10-digit number; stays pending until the forwarded-to line answers once",
+      "forward_all_deactivate": "*73",
+      "ring_time_code": "*47, then at the second dial tone 18 for three rings or 24 for four",
+      "notes": "No-answer forwarding on traditional AT&T lines is enabled by an agent (800.288.2020)."
+    },
+    {
+      "id": "xfinity-voice",
+      "name": "Xfinity Voice (Comcast)",
+      "category": "landline",
+      "forward_all_activate": "*72",
+      "forward_all_deactivate": "*73",
+      "portal_path": "xfinity.com or Xfinity app > Xfinity Voice settings > Call Forwarding",
+      "notes": "No busy or no-answer dial codes. Advanced Call Forwarding (portal only) can ring a second number alongside the line and set rings-before-voicemail."
+    },
+    {
+      "id": "blue-ridge",
+      "name": "Blue Ridge Communications",
+      "category": "landline",
+      "forward_all_activate": "*72, press 1, enter NUMBER11, press #",
+      "forward_all_deactivate": "*72, press 1 again (toggle; confirmation beeps)",
+      "portal_path": "My Blue Ridge app/website > phone line > Edit > Call Handling > Forward All",
+      "notes": "Documents ONLY forward-all. There is no *73 and no busy or no-answer variant."
+    },
+    {
+      "id": "spectrum",
+      "name": "Spectrum (home or business)",
+      "category": "landline",
+      "forward_all_activate": "*72NUMBER10",
+      "forward_all_deactivate": "*73",
+      "portal_path": "spectrum.net > Voice > Call Forwarding (No Answer forwarding is portal-only)"
+    },
+    {
+      "id": "google-voice",
+      "name": "Google Voice",
+      "category": "voip",
+      "portal_path": "Google Voice app > Settings > Calls",
+      "notes": "Google documents that forwarding a Google Voice number to an automated system is unsupported. Supported route: set 'Use carrier only' so calls ring the linked cell through the carrier, turn Screen Calls off, then apply the cell carrier's no-answer forwarding code on the linked phone. Google verifies new linked numbers by a code that must be typed on the called line."
+    },
+    {
+      "id": "ringcentral",
+      "name": "RingCentral",
+      "category": "voip",
+      "portal_path": "Online account > Settings > Call Handling & Forwarding",
+      "notes": "Add a forwarding number and set the number of rings before forwarding."
+    },
+    {
+      "id": "vonage",
+      "name": "Vonage",
+      "category": "voip",
+      "forward_all_activate": "*72",
+      "forward_all_deactivate": "*73",
+      "portal_path": "Online account > Features & Settings > Calling Features > Call Forwarding",
+      "notes": "Portal path supports ring-seconds-before-forward; handset codes are forward-all only."
+    },
+    {
+      "id": "hosted-voip-platforms",
+      "name": "Hosted business phone systems (Grasshopper, OpenPhone, Dialpad, Twilio/Bandwidth/Telnyx-based)",
+      "category": "voip",
+      "portal_path": "Inside the phone system's own app: no-answer or overflow forwarding setting",
+      "notes": "Numbers hosted on telephony platforms do not use carrier dial codes; forwarding is an app setting."
+    }
+  ]
+}
