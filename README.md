@@ -30,6 +30,10 @@ Small businesses use these codes to send missed calls to an answering service, a
 
 VoIP services (Google Voice, RingCentral, Grasshopper/OpenPhone/Dialpad and other hosted systems) configure forwarding in their app instead of dial codes; see the JSON for exact paths and caveats. Google Voice specifically does not support forwarding to automated systems; the supported route is via the linked cell's carrier code.
 
+## Why forward missed calls
+
+On the contractor lines OnCrew answers, 33.4% of conversations arrive outside weekday business hours (16.5% on weekday evenings and early mornings, 16.9% on weekends), 15.1% are emergencies, and 29.7% end with the caller asking to be called back. That is 910 inbound conversations of 12 seconds or longer over the 120 days to October 2, 2026, on the lines of the five contractors who have paid for OnCrew (HVAC, plumbing and roofing); on the two HVAC-and-plumbing shops, 36.9% arrived after hours and 20.9% were emergencies. Method and exclusions: [oncrew.ai/resources/missed-call-statistics](https://oncrew.ai/resources/missed-call-statistics#first-party). One vendor's lines, not a market sample.
+
 ## Verification
 
 Each entry names its source in the JSON; most are the carrier's own published support documentation (CenturyLink's comes from answering-service onboarding guides). Last full review: 2026-10-03. Corrections welcome by issue or PR, ideally with a link to the carrier doc.
