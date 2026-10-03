@@ -6,7 +6,7 @@ Small businesses use these codes to send missed calls to an answering service, a
 
 ## Data
 
-- [`data/forwarding-codes.json`](data/forwarding-codes.json) — structured entries per carrier: codes by forwarding type, portal paths, and caveats.
+- [`data/forwarding-codes.json`](data/forwarding-codes.json): structured entries per carrier: codes by forwarding type, portal paths, and caveats.
 
 `NUMBER10` in a code means the 10-digit destination number (digits only). `NUMBER11` means the 11-digit form starting with 1.
 
@@ -15,21 +15,24 @@ Small businesses use these codes to send missed calls to an answering service, a
 | Carrier | Forward missed calls (no answer) | Forward every call | Turn off |
 |---|---|---|---|
 | Verizon wireless | `*71` + number | `*72` + number | `*73` |
-| AT&T wireless | `*61*1` + number + `#` | `*21*1` + number + `#` | `#61#` / `#21#` |
-| T-Mobile | `**61*1` + number + `#` | — | `##61#` (or `##004#` reset) |
-| Verizon landline | `*92` | — | `*93` (`*91` for busy) |
+| AT&T wireless | `**004*1` + number + `#` (no answer, busy, unreachable); `*61*1` + number + `#` (no answer only) | `*21*1` + number + `#` | `##004#` / `#61#` / `#21#` |
+| T-Mobile | `**004*1` + number + `#` (no answer, busy, unreachable); `**61*1` + number + `#` (no answer only) | `**21*1` + number + `#` | `##004#` / `##61#` / `##21#` |
+| Verizon landline | `*92` | n/a | `*93` (`*91` for busy) |
 | AT&T U-verse | `*92` + number + `#` | `*72` + number + `#` | `*93#` / `*73#` |
 | AT&T landline | agent-enabled (800.288.2020) | `*72` + number | `*73` |
-| Xfinity Voice | portal only | `*72` | `*73` |
+| Xfinity Voice (home) | portal only | `*72` | `*73` |
+| Comcast Business Voice / VoiceEdge | `*92`, number at the second dial tone | `*72` + number | `*93` / `*73` |
 | Blue Ridge | not offered | `*72`, press `1`, 11-digit number, `#` | `*72`, press `1` again (toggle) |
-| Spectrum | portal only | `*72` + number | `*73` |
+| Spectrum (home) | portal only | `*72` + number | `*73` |
+| Spectrum Business | `*92` + number + `#` (`*90` busy) | `*72` + number | `*93` (`*91` busy) / `*73` |
+| CenturyLink (Lumen) business | `*92`, number at the dial tone (feature must be on the line) | `*72` + number | `*93` / `*73` |
 | Vonage | portal only | `*72` | `*73` |
 
 VoIP services (Google Voice, RingCentral, Grasshopper/OpenPhone/Dialpad and other hosted systems) configure forwarding in their app instead of dial codes; see the JSON for exact paths and caveats. Google Voice specifically does not support forwarding to automated systems; the supported route is via the linked cell's carrier code.
 
 ## Verification
 
-Every entry is checked against the carrier's own published support documentation. Last full review: 2026-08-25. Corrections welcome by issue or PR, ideally with a link to the carrier doc.
+Each entry names its source in the JSON; most are the carrier's own published support documentation (CenturyLink's comes from answering-service onboarding guides). Last full review: 2026-10-03. Corrections welcome by issue or PR, ideally with a link to the carrier doc.
 
 ## License and attribution
 

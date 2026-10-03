@@ -4,7 +4,7 @@
     "NUMBER10": "10-digit destination number, digits only",
     "NUMBER11": "11-digit destination number starting with 1, digits only"
   },
-  "verified_note": "Each entry is checked against the carrier's own published support documentation. Last full review: 2026-08-25.",
+  "verified_note": "Each entry names its source; most are the carrier's own published support documentation. Last full review: 2026-10-03.",
   "carriers": [
     {
       "id": "verizon-wireless",
@@ -23,7 +23,9 @@
       "forward_all_activate": "*21*1NUMBER10#",
       "no_answer_deactivate": "#61#",
       "forward_all_deactivate": "#21#",
-      "notes": "Dial the code like a phone number and press call. Standard GSM network codes; if the handset rejects them, use the phone's call-forwarding settings menu (Android: Phone app > Settings > Calling accounts > SIM > Call forwarding) or call 611."
+      "notes": "**004* forwards the calls you don't answer, decline (declined calls count as busy on GSM), or miss with no signal, in one code; *61* covers no-answer only. Dial the code like a phone number and press call. If the handset rejects them, use the phone's call-forwarding settings menu (Android: Phone app > Settings > Calling accounts > SIM > Call forwarding) or call 611. Cricket, Consumer Cellular, H2O and Red Pocket run on AT&T's network and take the same codes.",
+      "conditional_all_activate": "**004*1NUMBER10#",
+      "conditional_all_deactivate": "##004#"
     },
     {
       "id": "tmobile",
@@ -35,7 +37,11 @@
       "no_answer_deactivate": "##61#",
       "busy_deactivate": "##67#",
       "reset_all_forwarding": "##004#",
-      "notes": "##004# resets all forwarding rules to carrier default."
+      "notes": "**004* forwards no answer, busy/declined and unreachable calls in one code; ##004# resets all forwarding rules. If the phone says it cannot process the request, turn off Wi-Fi calling and dial again. Metro, Mint, Boost, Ultra Mobile, Google Fi, US Mobile, Tello and Simple Mobile run on T-Mobile's network and take the same codes.",
+      "conditional_all_activate": "**004*1NUMBER10#",
+      "conditional_all_deactivate": "##004#",
+      "forward_all_activate": "**21*1NUMBER10#",
+      "forward_all_deactivate": "##21#"
     },
     {
       "id": "verizon-landline",
@@ -81,7 +87,7 @@
       "forward_all_activate": "*72",
       "forward_all_deactivate": "*73",
       "portal_path": "xfinity.com or Xfinity app > Xfinity Voice settings > Call Forwarding",
-      "notes": "No busy or no-answer dial codes. Advanced Call Forwarding (portal only) can ring a second number alongside the line and set rings-before-voicemail."
+      "notes": "No busy or no-answer dial codes. Advanced Call Forwarding (portal only) can ring a second number alongside the line and set rings-before-voicemail. Comcast Business lines differ: see comcast-business."
     },
     {
       "id": "blue-ridge",
@@ -94,11 +100,46 @@
     },
     {
       "id": "spectrum",
-      "name": "Spectrum (home or business)",
+      "name": "Spectrum (home phone)",
       "category": "landline",
       "forward_all_activate": "*72NUMBER10",
       "forward_all_deactivate": "*73",
-      "portal_path": "spectrum.net > Voice > Call Forwarding (No Answer forwarding is portal-only)"
+      "portal_path": "spectrum.net > Voice > Call Forwarding (No Answer forwarding is portal-only)",
+      "notes": "Spectrum Business lines differ: see spectrum-business (no-answer forwarding by dial code)."
+    },
+    {
+      "id": "comcast-business",
+      "name": "Comcast Business Voice and VoiceEdge",
+      "category": "business landline",
+      "no_answer_activate": "*92, then NUMBER10 at the second dial tone (VoiceEdge: at the voice prompt), then wait for the confirmation tone",
+      "no_answer_deactivate": "*93",
+      "forward_all_activate": "*72, then NUMBER10",
+      "forward_all_deactivate": "*73",
+      "portal_path": "business.comcast.com > Business Voice: Phone > Features > Call Forwarding (Call Forwarding No Answer); VoiceEdge: Business VoiceEdge User > Feature Settings > Call Forwarding",
+      "notes": "Number of rings before forwarding is set online. Comcast says not to turn on Call Forwarding No Answer on a phone in a Hunt Group; a VoiceEdge admin sets the group's No Answer settings instead. Source: Comcast Business support, call forwarding and routing."
+    },
+    {
+      "id": "spectrum-business",
+      "name": "Spectrum Business Voice",
+      "category": "business landline",
+      "no_answer_activate": "*92, then NUMBER10, then #, then wait for the confirmation",
+      "no_answer_deactivate": "*93",
+      "busy_activate": "*90",
+      "busy_deactivate": "*91",
+      "forward_all_activate": "*72NUMBER10",
+      "forward_all_deactivate": "*73",
+      "portal_path": "Spectrum Business account > Voice (Voice Manager) > Call Forwarding > No Answer",
+      "notes": "If *92 gives an error tone, No Answer forwarding is not switched on for the line yet; turn it on in the same Call Forwarding settings. Source: Spectrum Business support."
+    },
+    {
+      "id": "centurylink",
+      "name": "CenturyLink (Lumen) business lines",
+      "category": "business landline",
+      "no_answer_activate": "*92, then NUMBER10 at the dial tone, then wait for the confirmation",
+      "no_answer_deactivate": "*93",
+      "forward_all_activate": "*72NUMBER10",
+      "forward_all_deactivate": "*73",
+      "notes": "Works only where Call Forwarding No Answer is on the line; CenturyLink adds it on request. Source: answering-service onboarding guides that publish CenturyLink/Lumen steps (Mango Voice, answeringservicecare.com), not a CenturyLink page."
     },
     {
       "id": "google-voice",
